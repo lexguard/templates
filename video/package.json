@@ -1,0 +1,35 @@
+{
+  "dependencies": {
+    "@astrojs/node": "^11.0.2",
+    "@astrojs/react": "^6.0.1",
+    "@tailwindcss/vite": "^4.3.2",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "astro": "^7.0.7",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.24.0",
+    "pocketbase": "^0.27.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "tailwind-merge": "^3.6.0",
+    "tailwindcss": "^4.3.2",
+    "wouter": "^3.10.0"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "name": "workspace",
+  "scripts": {
+    "astro": "astro",
+    "build": "astro build",
+    "check": "tsc --noEmit",
+    "dev": "astro dev",
+    "preview": "astro preview"
+  },
+  "type": "module",
+  "version": "0.0.1"
+}

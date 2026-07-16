@@ -1,0 +1,12 @@
+---
+// Catch-all for the `/pb` path.
+//
+// In the LexGuard Studio container the `/pb` endpoint is proxied to PocketBase
+// and intercepted *before* it ever reaches Astro, so this route never runs
+// there. It only fires when the app is served standalone (no proxy), where
+// there is no PocketBase to talk to — in that case we always return 404 instead
+// of letting the request fall through to the app's `[...path].astro` catch-all.
+export const prerender = false;
+
+return new Response(null, { status: 404 });
+---
