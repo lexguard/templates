@@ -1,0 +1,368 @@
+import type { MetaAdsPlan } from './interfaces';
+
+// ---------------------------------------------------------------------------
+// Template config — replace these with your own brand and the example plan
+// below re-labels itself. Everything here is fake, safe-to-ship placeholder
+// data. See the other files in src/data for more example shapes.
+// ---------------------------------------------------------------------------
+
+/** Company / brand name. */
+const BRAND = 'Acme';
+/** The product being advertised. */
+const PRODUCT = 'Acme App';
+/** Where the call-to-action sends people (no protocol, e.g. brand.example). */
+const CTA_URL = 'acme.example';
+
+export const acmeAppLaunch: MetaAdsPlan = {
+  title: `Meta Ads — Lanzamiento ${BRAND} (ejemplo)`,
+  subtitle: `Campaña de validación para ${PRODUCT} · datos de ejemplo, reemplázalos con los tuyos.`,
+  updated: '2026-07-10',
+  account: `${BRAND} Ads (USD)`,
+  successCriteria:
+    '≥30 instalaciones, CPI ≤ $2.50, ≥40% de activación en día 1 y ≥2 ángulos con CTR ≥1%.',
+  principles: [
+    {
+      title: 'Público enfocado',
+      body: 'Una persona concreta con un problema concreto. Nada de hablarle a "todos los que quieren organizarse".',
+    },
+    {
+      title: 'Un dolor por anuncio',
+      body: 'Cada creativo ataca un solo problema. Si intenta decir todo, no dice nada.',
+    },
+    {
+      title: 'Autenticidad > producción',
+      body: 'Celular, cara real, guion natural. La producción cara viene después de validar el mensaje.',
+    },
+    {
+      title: 'Datos antes de opinión',
+      body: 'Las reglas de decisión se escriben antes de lanzar para no discutir con los números.',
+    },
+  ],
+  thesis: [
+    {
+      h: 'H1 · Público real',
+      m: '¿Qué segmento instala y activa?',
+      i: 'Evento de activación por ad set',
+    },
+    {
+      h: 'H2 · Dolor dominante',
+      m: 'CPI y activación por ángulo creativo',
+      i: 'C1 con UTM por ángulo',
+    },
+    {
+      h: 'H3 · Gancho de valor',
+      m: 'CTR y tasa de instalación por gancho',
+      i: 'A/B de ganchos en C1',
+    },
+  ],
+  campaigns: [
+    {
+      id: 'C1',
+      name: 'Prospección',
+      dest: `${CTA_URL}/descarga`,
+      budget: '$60/día (3 ad sets)',
+      goal: 'OUTCOME_APP_PROMOTION → Instalaciones',
+      note: '3 ad sets ABO (A1/A2/A3), público amplio 18-45, sin límite de costo.',
+      angles: [
+        {
+          code: 'A1',
+          pain: 'Se me olvidan las cosas',
+          ads: 'AD-01 + AD-04',
+          hook: 'Deja de confiar en tu memoria',
+        },
+        {
+          code: 'A2',
+          pain: 'Empiezo y lo abandono',
+          ads: 'AD-02',
+          hook: 'Rachas que sí se mantienen',
+        },
+        {
+          code: 'A3',
+          pain: 'Demasiadas apps',
+          ads: 'AD-03',
+          hook: 'Una sola app, sin ruido',
+        },
+      ],
+    },
+    {
+      id: 'C2',
+      name: 'Retargeting',
+      dest: `${CTA_URL}/descarga`,
+      budget: '$30/día (desde día 6)',
+      goal: 'OUTCOME_SALES → Instalaciones',
+      note: 'Visitantes web 14 días + video viewers 25%, excluyendo quienes ya instalaron.',
+      angles: [
+        {
+          code: 'R1',
+          pain: 'Lo pensaste pero no lo hiciste',
+          ads: 'AD-05 + AD-06',
+          hook: 'Tu primera racha empieza hoy',
+        },
+      ],
+    },
+  ],
+  ads: [
+    {
+      id: 'AD-01',
+      name: 'Recordatorios que funcionan',
+      format: 'Video 9:16',
+      pillar: 'Esfuerzo',
+      problem: 'Olvidos',
+      hook: 'Deja de confiar en tu memoria',
+      creative: {
+        headline: 'Deja de confiar en tu memoria',
+        primaryText: `${PRODUCT} te avisa en el momento justo, no cuando ya es tarde.`,
+        cta: 'Descargar',
+        destination: `https://${CTA_URL}/descarga?utm_source=meta&utm_medium=paid&utm_campaign=c1-prospeccion&utm_content=ad-01-recordatorios`,
+        displayLink: `${CTA_URL}/descarga`,
+        format: 'Video vertical',
+        aspectRatio: '9:16',
+        duration: '15-20s',
+        imageOrVideoNotes: 'Persona real recibiendo una notificación útil y completando una tarea.',
+        captions: true,
+      },
+      utm: { source: 'meta', medium: 'paid', campaign: 'c1-prospeccion', content: 'ad-01-recordatorios' },
+    },
+    {
+      id: 'AD-02',
+      name: 'Rachas que se mantienen',
+      format: 'Video 9:16',
+      pillar: 'Probabilidad',
+      problem: 'Abandono',
+      hook: 'Rachas que sí se mantienen',
+      creative: {
+        headline: 'Rachas que sí se mantienen',
+        primaryText: 'La mayoría abandona en la semana 2. Te ayudamos a llegar a la 8.',
+        cta: 'Descargar',
+        destination: `https://${CTA_URL}/descarga?utm_source=meta&utm_medium=paid&utm_campaign=c1-prospeccion&utm_content=ad-02-rachas`,
+        displayLink: `${CTA_URL}/descarga`,
+        format: 'Video testimonial',
+        aspectRatio: '9:16',
+        duration: '20-30s',
+        imageOrVideoNotes: 'Testimonio de alguien que mantuvo un hábito 60 días.',
+        captions: true,
+      },
+      utm: { source: 'meta', medium: 'paid', campaign: 'c1-prospeccion', content: 'ad-02-rachas' },
+    },
+    {
+      id: 'AD-03',
+      name: 'Una sola app',
+      format: 'Carousel 4:5',
+      pillar: 'Esfuerzo',
+      problem: 'Fatiga de apps',
+      hook: 'Una sola app, sin ruido',
+      creative: {
+        headline: '¿Cuántas apps abriste hoy?',
+        primaryText: `${PRODUCT} junta tus hábitos, notas y recordatorios en un solo lugar.`,
+        cta: 'Descargar',
+        destination: `https://${CTA_URL}/descarga?utm_source=meta&utm_medium=paid&utm_campaign=c1-prospeccion&utm_content=ad-03-una-app`,
+        displayLink: `${CTA_URL}/descarga`,
+        format: 'Carousel estático',
+        aspectRatio: '4:5',
+        duration: 'Carousel 3 tarjetas',
+        imageOrVideoNotes: 'Tarjeta 1: el desorden de apps. Tarjeta 2: una sola. Tarjeta 3: CTA.',
+        captions: true,
+      },
+      utm: { source: 'meta', medium: 'paid', campaign: 'c1-prospeccion', content: 'ad-03-una-app' },
+    },
+    {
+      id: 'AD-04',
+      name: 'Demo de 15 segundos',
+      format: 'Screen recording 9:16',
+      pillar: 'Tiempo',
+      problem: 'Fricción de inicio',
+      hook: 'Configúralo en 15 segundos',
+      creative: {
+        headline: 'Configúralo en 15 segundos',
+        primaryText: 'Sin tutoriales largos. Abres, eliges un hábito y listo.',
+        cta: 'Descargar',
+        destination: `https://${CTA_URL}/descarga?utm_source=meta&utm_medium=paid&utm_campaign=c1-prospeccion&utm_content=ad-04-demo`,
+        displayLink: `${CTA_URL}/descarga`,
+        format: 'Screen recording',
+        aspectRatio: '9:16',
+        duration: '15s',
+        imageOrVideoNotes: 'POV del onboarding real de la app, sin cortes.',
+        captions: true,
+      },
+      utm: { source: 'meta', medium: 'paid', campaign: 'c1-prospeccion', content: 'ad-04-demo' },
+    },
+    {
+      id: 'AD-05',
+      name: 'Recordatorio suave',
+      format: 'Estático 4:5',
+      pillar: 'Probabilidad',
+      problem: 'Intención sin acción',
+      hook: 'Tu primera racha empieza hoy',
+      creative: {
+        headline: 'Tu primera racha empieza hoy',
+        primaryText: 'Lo viste, lo pensaste. Da el primer paso: 2 minutos.',
+        cta: 'Descargar',
+        destination: `https://${CTA_URL}/descarga?utm_source=meta&utm_medium=paid&utm_campaign=c2-retargeting&utm_content=ad-05-primera-racha`,
+        displayLink: `${CTA_URL}/descarga`,
+        format: 'Estático',
+        aspectRatio: '4:5',
+        duration: 'N/A',
+        imageOrVideoNotes: 'Diseño limpio, un solo mensaje y CTA claro.',
+        captions: false,
+      },
+      utm: { source: 'meta', medium: 'paid', campaign: 'c2-retargeting', content: 'ad-05-primera-racha' },
+    },
+    {
+      id: 'AD-06',
+      name: 'Prueba social',
+      format: 'Carousel casos 4:5',
+      pillar: 'Probabilidad',
+      problem: 'Desconfianza',
+      hook: 'Miles ya empezaron',
+      creative: {
+        headline: 'Miles ya empezaron',
+        primaryText: 'Historias reales de gente que construyó el hábito que quería.',
+        cta: 'Descargar',
+        destination: `https://${CTA_URL}/descarga?utm_source=meta&utm_medium=paid&utm_campaign=c2-retargeting&utm_content=ad-06-prueba-social`,
+        displayLink: `${CTA_URL}/descarga`,
+        format: 'Carousel casos',
+        aspectRatio: '4:5',
+        duration: 'Carousel 4 tarjetas',
+        imageOrVideoNotes: 'Una tarjeta por caso: foto + resultado concreto.',
+        captions: true,
+      },
+      utm: { source: 'meta', medium: 'paid', campaign: 'c2-retargeting', content: 'ad-06-prueba-social' },
+    },
+  ],
+  adSetConfigs: {
+    A1: {
+      name: 'C1 — A1 · Olvidos',
+      budget: '$20/día',
+      bidStrategy: 'Lowest cost',
+      optimizationGoal: 'Instalaciones de app',
+      conversionLocation: 'App',
+      performanceGoal: 'Maximizar instalaciones',
+      audience: {
+        location: ['Estados Unidos'],
+        ageMin: 18,
+        ageMax: 45,
+        gender: 'all',
+        languages: ['Inglés'],
+        interests: ['Productividad', 'Hábitos', 'Bienestar'],
+        placements: 'advantage_plus',
+      },
+    },
+    A2: {
+      name: 'C1 — A2 · Abandono',
+      budget: '$20/día',
+      bidStrategy: 'Lowest cost',
+      optimizationGoal: 'Instalaciones de app',
+      conversionLocation: 'App',
+      performanceGoal: 'Maximizar instalaciones',
+      audience: {
+        location: ['Estados Unidos'],
+        ageMin: 18,
+        ageMax: 45,
+        gender: 'all',
+        languages: ['Inglés'],
+        interests: ['Metas personales', 'Autoayuda', 'Fitness'],
+        placements: 'advantage_plus',
+      },
+    },
+    A3: {
+      name: 'C1 — A3 · Fatiga de apps',
+      budget: '$20/día',
+      bidStrategy: 'Lowest cost',
+      optimizationGoal: 'Instalaciones de app',
+      conversionLocation: 'App',
+      performanceGoal: 'Maximizar instalaciones',
+      audience: {
+        location: ['Estados Unidos'],
+        ageMin: 22,
+        ageMax: 45,
+        gender: 'all',
+        languages: ['Inglés'],
+        interests: ['Apps de productividad', 'Minimalismo', 'Tecnología'],
+        placements: 'advantage_plus',
+      },
+    },
+    R1: {
+      name: 'C2 — R1 · Retargeting',
+      budget: '$30/día',
+      bidStrategy: 'Lowest cost',
+      optimizationGoal: 'Instalaciones de app',
+      conversionLocation: 'App',
+      performanceGoal: 'Convertir visitantes calientes',
+      audience: {
+        location: ['Estados Unidos'],
+        ageMin: 18,
+        ageMax: 45,
+        gender: 'all',
+        languages: ['Inglés'],
+        customAudiences: ['Visitantes web 14 días', 'Video viewers 25% · 14 días'],
+        excludedAudiences: ['Ya instalaron'],
+        placements: 'advantage_plus',
+      },
+    },
+  },
+  budgetVariant: '$690 / 14 días',
+  regularPrice: '$4.99/mes',
+  offerPrice: 'Gratis 14 días',
+  offerLabel: 'Prueba de lanzamiento',
+  budgetBreakdown: [
+    { item: 'C1 — Prospección', value: '3 ad sets × $20 = $60/día' },
+    { item: 'C2 — Retargeting', value: '$30/día desde día 6' },
+    { item: 'Total estimado', value: '$690 en 14 días' },
+  ],
+  decisionRules: [
+    { day: 'Día 5', rule: 'Ad con CTR <0.7% o CPI >2x el mejor ángulo → apagar.' },
+    { day: 'Día 10', rule: 'Declarar ángulo ganador por menor costo por instalación activada.' },
+    { day: 'Día 14', rule: 'Corte de tesis: ≥30 instalaciones y ≥40% de activación día 1.' },
+  ],
+  launchSteps: [
+    { phase: 'Día 0', action: 'Verificar SDK/eventos de app, crear públicos y cargar UTMs.' },
+    { phase: 'Día 1', action: 'Lanzar C1 (3 ad sets ABO).' },
+    { phase: 'Día 6', action: 'Lanzar C2 retargeting con AD-05/AD-06.' },
+    { phase: 'Día 10', action: 'Reasignar presupuesto al ángulo ganador.' },
+  ],
+  adAssignments: [
+    { adId: 'AD-01', campaignId: 'C1', adSet: 'A1', role: 'principal' },
+    { adId: 'AD-04', campaignId: 'C1', adSet: 'A1', role: 'secundario' },
+    { adId: 'AD-02', campaignId: 'C1', adSet: 'A2', role: 'principal' },
+    { adId: 'AD-03', campaignId: 'C1', adSet: 'A3', role: 'principal' },
+    { adId: 'AD-05', campaignId: 'C2', adSet: 'R1', role: 'principal' },
+    { adId: 'AD-06', campaignId: 'C2', adSet: 'R1', role: 'secundario' },
+  ],
+  spendTimeline: [
+    // Días 1–5: solo C1 ($60/día)
+    ...Array.from({ length: 5 }, (_, i) => ({
+      day: i + 1,
+      c1: 60,
+      c2: 0,
+      c3: 0,
+      total: 60,
+      cumulative: 60 * (i + 1),
+    })),
+    // Días 6–14: C1 + C2 ($90/día)
+    ...Array.from({ length: 9 }, (_, i) => {
+      const prev = 60 * 5;
+      return {
+        day: i + 6,
+        c1: 60,
+        c2: 30,
+        c3: 0,
+        total: 90,
+        cumulative: prev + 90 * (i + 1),
+      };
+    }),
+  ],
+  adRuns: [
+    { adId: 'AD-01', campaignId: 'C1', adSet: 'A1', role: 'principal', startDay: 1, endDay: 14, dailySpend: 10 },
+    { adId: 'AD-04', campaignId: 'C1', adSet: 'A1', role: 'secundario', startDay: 1, endDay: 14, dailySpend: 10 },
+    { adId: 'AD-02', campaignId: 'C1', adSet: 'A2', role: 'principal', startDay: 1, endDay: 14, dailySpend: 20 },
+    { adId: 'AD-03', campaignId: 'C1', adSet: 'A3', role: 'principal', startDay: 1, endDay: 14, dailySpend: 20 },
+    { adId: 'AD-05', campaignId: 'C2', adSet: 'R1', role: 'principal', startDay: 6, endDay: 14, dailySpend: 15 },
+    { adId: 'AD-06', campaignId: 'C2', adSet: 'R1', role: 'secundario', startDay: 6, endDay: 14, dailySpend: 15 },
+  ],
+  pending: [
+    'Verificar el evento de activación en el panel de eventos de la app.',
+    'Confirmar permisos de uso de testimonios reales.',
+    'Cargar los UTMs por anuncio antes de crear las campañas.',
+    'Grabar los creativos prioritarios: AD-01, AD-02.',
+  ],
+};
