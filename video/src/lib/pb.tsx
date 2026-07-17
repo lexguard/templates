@@ -1,4 +1,5 @@
 import PocketBase, { type RecordModel } from "pocketbase";
+import { nanoid } from "nanoid";
 import { useCallback, useMemo, useState, useEffect, createContext, useContext } from "react";
 import { PlugZap, RefreshCw } from "lucide-react";
 import type { VideoProject, VerificationStatus, VerificationDefinition } from "../data/videos";
@@ -405,7 +406,7 @@ export function usePB(): PocketBase {
 function getVoterId(): string {
   let id = localStorage.getItem("video_voter_id");
   if (!id) {
-    id = crypto.randomUUID();
+    id = nanoid();
     localStorage.setItem("video_voter_id", id);
   }
   return id;
